@@ -16,12 +16,16 @@ export const loader = async ({ request }) => {
 export default function App() {
   const { apiKey } = useLoaderData();
 
+
   return (
     <AppProvider isEmbeddedApp apiKey={apiKey} hello={"Himanshu"}>
       <NavMenu>
         <Link to="/app" rel="home">
-          Home
+          Dashboard
         </Link>
+        <Link to="/app/reviews">Manage Reviews</Link>
+        <Link to="/app/analytics">Analytics</Link>
+        <Link to="/app/settings">Settings</Link>
         <Link to="/app/additional">Additional page</Link>
       </NavMenu>
       <Outlet />
