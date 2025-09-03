@@ -30,3 +30,53 @@ model Session {
   collaborator  Boolean?  @default(false)
   emailVerified Boolean?  @default(false)
 }
+
+model Customer {
+  id        String   @id
+  email     String   @unique
+  name      String?
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  // Relation to Customer
+  reviews  Review[]
+  comments Comment[]
+}
+
+model Review {
+  id        String   @id @default(cuid())
+  rating    Int
+  title     String?
+  body      String
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  // Relation to Customer
+  customerId String
+  customer   Customer @relation(fields: [customerId], references: [id])
+
+  // A review can have many comments
+  comments Comment[]
+}
+
+model Comment {
+  id        String   @id @default(cuid())
+  body      String
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  // Relation to the Customer who wrote the comment.
+  authorId String
+  author   Customer @relation(fields: [authorId], references: [id])
+
+  // Relation to the review this comment is on
+  reviewId String
+  review   Review @relation(fields: [reviewId], references: [id])
+
+  // Self-relation for threaded comments/replies
+  // A comment can have a parent comment
+
+  parentId String?
+  parent   Comment?  @relation("Replies", fields: [parentId], references: [id], onDelete: NoAction, onUpdate: NoAction)
+  replies  Comment[] @relation("Replies")
+}

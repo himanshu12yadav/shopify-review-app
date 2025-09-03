@@ -3,11 +3,12 @@
 client_id = "a3719d0a3f0136a86ed6ba52e37c4ebd"
 name = "review-app"
 handle = "review-app-219"
-application_url = "https://example.com/"
+application_url = "https://drum-finest-boy-conviction.trycloudflare.com"
 embedded = true
 
 [build]
 include_config_on_deploy = true
+automatically_update_urls_on_dev = true
 
 [webhooks]
 api_version = "2025-07"
@@ -25,7 +26,7 @@ api_version = "2025-07"
 scopes = "write_products"
 
 [auth]
-redirect_urls = [ "https://example.com/api/auth" ]
+redirect_urls = ["https://drum-finest-boy-conviction.trycloudflare.com/auth/callback", "https://drum-finest-boy-conviction.trycloudflare.com/auth/shopify/callback", "https://drum-finest-boy-conviction.trycloudflare.com/api/auth/callback"]
 
 [pos]
 embedded = false
